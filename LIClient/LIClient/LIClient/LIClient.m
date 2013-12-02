@@ -33,7 +33,7 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 
 - (void)fetchCurrentUser:(LIUserField)fields success:(void (^)(LIUser* user))success failure:(void (^)(NSError* error))failure
 {
-	[self fetchCurrentUserInfo:fields success:^(NSString* xml) {
+	[self fetchCurrentUserInfo:self.accessToken fields:fields success:^(NSString* xml) {
 		[self parseUserInfo:xml success:^(LIUser* user) {
 			if (success)
 				success(user);
@@ -54,9 +54,9 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 	return [NSString stringWithFormat:UPLinkedUserInfoUrl, [self formatFields:fields], accessToken];
 }
 
--(void)fetchCurrentUserInfo:(LIUserField)fields success:(void (^)(NSString* xml))success failure:(void (^)(NSError* error))failure
+-(void)fetchCurrentUserInfo:(NSString*)accessToken fields:(LIUserField)fields success:(void (^)(NSString* xml))success failure:(void (^)(NSError* error))failure
 {
-    NSString* url = [self currentUserInfoUrl:self.accessToken fields:fields];
+    NSString* url = [self currentUserInfoUrl:accessToken fields:fields];
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError)
