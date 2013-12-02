@@ -184,21 +184,6 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 	}];
 }
 
-- (void)fetchPhoto:(NSString*)url success:(void (^)(UIImage* photo))success failure:(void (^)(NSError* error))failure
-{
-	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError)
-	{
-		if (connectionError)
-			if (failure)
-				failure(connectionError);
-		
-		UIImage* photo = [[UIImage alloc] initWithData:data];
-		if (success)
-			success(photo);
-	 }];
-}
-
 - (NSString*)formatFields:(LIUserField)fields
 {
 	NSMutableArray* array = [[NSMutableArray alloc] init];
