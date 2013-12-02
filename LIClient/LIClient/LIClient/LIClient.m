@@ -63,7 +63,7 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 	 {
 		 if (connectionError)
 			 if (failure)
-				 failure(connectionError);
+				 return failure(connectionError);
 		 
 		 NSString* xml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 		 NSLog(@"%@", xml);
