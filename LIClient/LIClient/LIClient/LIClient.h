@@ -37,5 +37,6 @@ typedef enum {
 @property (copy, nonatomic) NSString* accessToken;
 - (id)initWithAccessToken:(NSString*)accessToken;
 - (void)fetchCurrentUser:(LIUserField)fields success:(void (^)(LIUser* user))success failure:(void (^)(NSError* error))failure;
+- (void)fetchPhoto:(NSString*)url success:(void (^)(UIImage* photo))success failure:(void (^)(NSError* error))failure;
 
 @end
