@@ -85,7 +85,7 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 		{
 			if (failure)
 			{
-				[callbackQueue addOperationWithBlock:^{
+				return [callbackQueue addOperationWithBlock:^{
 					failure(error);
 				}];
 			}
@@ -164,12 +164,12 @@ NSString* const UPLinkedUserInfoUrl = @"https://api.linkedin.com/v1/people/~:(%@
 		user.currentShare = currentShare;
 		user.phoneNumbers = [phoneNumbers copy];
 		user.positions = positions;
-				
+		
 		if (error)
 		{
 			if (failure)
 			{
-				[callbackQueue addOperationWithBlock:^{
+				return [callbackQueue addOperationWithBlock:^{
 					failure(error);
 				}];
 			}

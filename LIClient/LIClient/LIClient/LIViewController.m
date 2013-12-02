@@ -196,7 +196,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError) {
         if (connectionError)
 			if (failure)
-				failure(connectionError);
+				return failure(connectionError);
 		
         NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([responseString contains:@"access_token"] && [responseString contains:@"expires_in"])
@@ -205,7 +205,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
             NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             if (error)
 				if (failure)
-					failure(error);
+					return failure(error);
 			
             NSString* accessToken = [json valueForKey:@"access_token"];
 			NSString* durationString = [NSString stringWithFormat:@"%@", [json valueForKey:@"expires_in"]];
