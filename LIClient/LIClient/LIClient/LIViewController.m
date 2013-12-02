@@ -90,7 +90,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"%@", [[request URL] absoluteString]);
+    //NSLog(@"%@", [[request URL] absoluteString]);
 	NSDictionary* queryString = [self URLQueryParameters:[request URL]];
 	
 	//Check for cross-site request forgery
