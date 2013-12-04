@@ -108,7 +108,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 		[self.timer invalidate];
 		NSString* error = queryString[@"error"];
 		if ([error isEqualToString:@"access_denied"])
-			[self.delegate linkedInViewControllerDidCancel:self];
+			[self.delegate linkedInViewControllerDidCancel];
 		else
 			[self error:[queryString[@"error"] URLDecode]];
 

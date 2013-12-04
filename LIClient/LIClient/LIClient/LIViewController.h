@@ -28,7 +28,7 @@ typedef enum {
 - (void)linkedInViewControllerIsBusy:(BOOL)busy;
 - (void)linkedInViewControllerDidFail:(NSError*)error;
 - (void)linkedInViewControllerDidLogin:(LIUser*)user accessToken:(NSString*)accessToken expiration:(NSDate*)expiration;
-- (void)linkedInViewControllerDidCancel:(LIViewController*)viewController;
+- (void)linkedInViewControllerDidCancel;
 
 @end
 
