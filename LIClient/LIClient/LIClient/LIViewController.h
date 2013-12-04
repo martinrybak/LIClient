@@ -25,9 +25,10 @@ typedef enum {
 
 @protocol LIViewControllerDelegate <NSObject>
 
-- (void)linkedInViewController:(LIViewController*)viewController isBusy:(BOOL)busy;
-- (void)linkedInViewController:(LIViewController*)viewController didFail:(NSString*)error;
-- (void)linkedInViewController:(LIViewController*)viewController didSucceed:(NSString*)accessToken expiration:(NSDate*)expiration;
+- (void)linkedInViewControllerIsBusy:(BOOL)busy;
+- (void)linkedInViewControllerDidFail:(NSError*)error;
+- (void)linkedInViewControllerDidAuthenticate:(NSString*)accessToken expiration:(NSDate*)expiration;
+- (void)linkedInViewControllerDidLogin:(LIUser*)user;
 - (void)linkedInViewControllerDidCancel:(LIViewController*)viewController;
 
 @end
@@ -38,9 +39,11 @@ typedef enum {
 @property (copy, nonatomic) NSString* secretKey;
 @property (copy, nonatomic) NSString* state;
 @property (assign, nonatomic) LIPermission permissions;
+@property (assign, nonatomic) LIUserField userFields;
 @property (weak, nonatomic) id<LIViewControllerDelegate> delegate;
+@property (strong, nonatomic) LIClient* client;
 @property (strong, nonatomic) IBOutlet UIWebView* webView;
-- (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions;
+- (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions userFields:(LIUserField)userFields;
 + (BOOL)isNilOrEmpty:(NSString *)input;
 
 @end

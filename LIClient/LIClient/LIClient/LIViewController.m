@@ -29,7 +29,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 
 #pragma mark - Public
 
-- (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions
+- (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions userFields:(LIUserField)userFields
 {
 	if (self = [super init])
 	{
@@ -37,6 +37,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
         self.secretKey = secretKey;
 		self.state = state;
 		self.permissions = permissions;
+		self.userFields = userFields;
 	}
 	return self;
 }
@@ -60,7 +61,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	if (self.permissions == 0)
 		[NSException raise:@"permission must be set" format:nil];
 
-	[self.delegate linkedInViewController:self isBusy:YES];
+	[self.delegate linkedInViewControllerIsBusy:YES];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self authorizeUrl:self.permissions]]]];
 }
 
@@ -81,7 +82,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	if (!webView.loading)
 	{
 		[self.timer invalidate];
-		[self.delegate linkedInViewController:self isBusy:NO];
+		[self.delegate linkedInViewControllerIsBusy:NO];
 		[UIView animateWithDuration:0.3 animations:^{
 			self.webView.alpha = 1;
 		} completion:nil];
@@ -118,11 +119,21 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	if (queryString[@"code"])
     {
 		[self.timer invalidate];
-		[self.delegate linkedInViewController:self isBusy:YES];
+		[self.delegate linkedInViewControllerIsBusy:YES];
 		[self fetchAccessToken:queryString[@"code"] success:^(NSString* accessToken, NSDate* expiration) {
-			[self.delegate linkedInViewController:self isBusy:NO];
-			[self.delegate linkedInViewController:self didSucceed:accessToken expiration:expiration];
+			[self.delegate linkedInViewControllerIsBusy:NO];
+			[self.delegate linkedInViewControllerDidAuthenticate:accessToken expiration:expiration];
+			if (!self.client)
+				self.client = [[LIClient alloc] initWithAccessToken:accessToken];
+			[self.client fetchCurrentUser:self.userFields success:^(LIUser* user) {
+				[self.delegate linkedInViewControllerIsBusy:NO];
+				[self.delegate linkedInViewControllerDidLogin:user];
+			} failure:^(NSError* error) {
+				[self.delegate linkedInViewControllerIsBusy:NO];
+				[self error:[error localizedDescription]];
+			}];
 		} failure:^(NSError* error) {
+			[self.delegate linkedInViewControllerIsBusy:NO];
 			[self error:[error localizedDescription]];
 		}];
 		return NO;
@@ -220,14 +231,14 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 
 - (void)timeout
 {
-	[self.delegate linkedInViewController:self isBusy:NO];
-	[self.delegate linkedInViewController:self didFail:@"Could not connect to LinkedIn"];
+	[self error:@"Could not connect to LinkedIn"];
 }
 
-- (void)error:(NSString*)error
+- (void)error:(NSString*)message
 {
-	[self.delegate linkedInViewController:self isBusy:NO];
-	[self.delegate linkedInViewController:self didFail:error];
+	NSError* error = [NSError errorWithDomain:NSStringFromClass([self class]) code:-1 userInfo:@{ NSLocalizedDescriptionKey:message }];
+	[self.delegate linkedInViewControllerIsBusy:NO];
+	[self.delegate linkedInViewControllerDidFail:error];
 }
 
 @end

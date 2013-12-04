@@ -7,8 +7,7 @@
 //
 
 #import "LIViewController.h"
-#import "LIProfileViewController.h"
 
-@interface LIMainViewController : UIViewController <LIViewControllerDelegate, LIProfileViewControllerDelegate>
+@interface LIMainViewController : UIViewController <LIViewControllerDelegate>
 
 @end

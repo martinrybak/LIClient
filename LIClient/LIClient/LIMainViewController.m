@@ -13,7 +13,8 @@
 #import "NSString+CJStringValidator.h"
 #import "GSKeychain.h"
 
-NSString* const LIAccessTokenKey = @"LIAccessTokenKey";
+LIPermission const LIMainViewControllerDefaultPermissions = LIPermissionBasicProfile|LIPermissionFullProfile|LIPermissionContactInfo|LIPermissionEmailAddress|LIPermissionMessages|LIPermissionNetwork;
+LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFieldFirstName|LIUserFieldLastName|LIUserFieldHeadline|LIUserFieldEmail|LIUserFieldPhotoUrl;
 
 @interface LIMainViewController ()
 
@@ -30,45 +31,65 @@ NSString* const LIAccessTokenKey = @"LIAccessTokenKey";
     if ([[segue identifier] isEqualToString:@"showLinkedInLogin"])
 	{
 		LIViewController* liViewController = [segue destinationViewController];
-		liViewController.delegate = self;
+				
+		#warning Replace values with your own
 		liViewController.apiKey = @"ENTER YOUR LINKEDIN API KEY";
 		liViewController.secretKey = @"ENTER YOUR LINKEDIN SECRET KEY";
 		liViewController.state = @"ENTER A RANDOM STRING";
-		liViewController.permissions = LIPermissionBasicProfile | LIPermissionFullProfile | LIPermissionContactInfo | LIPermissionEmailAddress | LIPermissionMessages | LIPermissionNetwork;
-    }
-    if ([[segue identifier] isEqualToString:@"showLinkedInProfile"])
+		
+		liViewController.delegate = self;
+		liViewController.permissions = LIMainViewControllerDefaultPermissions;
+		liViewController.userFields = LIMainViewControllerDefaultUserFields;
+	}
+    if ([[segue identifier] isEqualToString:@"showLinkedInProfile"] || [[segue identifier] isEqualToString:@"autoShowLinkedInProfile"])
 	{
 		LIProfileViewController* liProfileViewController = [segue destinationViewController];
-		liProfileViewController.accessToken = [[GSKeychain systemKeychain] secretForKey:LIAccessTokenKey];
-		liProfileViewController.delegate = self;
+		liProfileViewController.user = self.user;
 	}
 }
 
-- (IBAction)linkedInLogin:(id)sender
+- (IBAction)login:(id)sender
 {
-	NSString* accessToken = [[GSKeychain systemKeychain] secretForKey:LIAccessTokenKey];
-	if ([LIViewController isNilOrEmpty:accessToken])
-		[self performSegueWithIdentifier:@"showLinkedInLogin" sender:self];
-	else
+	NSString* accessToken = [[GSKeychain systemKeychain] secretForKey:@"accessToken"];
+	if (!accessToken)
+		return [self performSegueWithIdentifier:@"showLinkedInLogin" sender:self];
+	
+	LIClient* client = [[LIClient alloc] initWithAccessToken:accessToken];
+	[client fetchCurrentUser:LIMainViewControllerDefaultUserFields success:^(LIUser* user) {
+		self.user = user;
 		[self performSegueWithIdentifier:@"showLinkedInProfile" sender:self];
+	} failure:^(NSError* error) {
+		[self error:error];
+	}];
 }
 
 #pragma mark - LIViewControllerDelegate
 
-- (void)linkedInViewController:(LIViewController*)viewController isBusy:(BOOL)busy
+- (void)linkedInViewControllerIsBusy:(BOOL)busy
 {
-	[self busy:busy];
+	UIWindow* window = [[[UIApplication sharedApplication] windows] lastObject];
+	if (busy)
+		[MBProgressHUD showHUDAddedTo:window animated:YES];
+	else
+		[MBProgressHUD hideHUDForView:window animated:YES];
 }
 
-- (void)linkedInViewController:(LIViewController*)viewController didFail:(NSString*)error
+- (void)linkedInViewControllerDidFail:(NSError*)error
 {
-	[self error:error];
 	[self dismissViewControllerAnimated:YES completion:nil];
+	[self error:error];
 }
 
-- (void)linkedInViewController:(LIViewController*)viewController didSucceed:(NSString*)accessToken expiration:(NSDate*)expiration
+- (void)linkedInViewControllerDidAuthenticate:(NSString*)accessToken expiration:(NSDate*)expiration
 {
-	[[GSKeychain systemKeychain] setSecret:accessToken forKey:LIAccessTokenKey];
+	//Save the accessToken to the secure iOS keychain so that you
+	//can query the LinkedIn API using only LIClient in the future
+	[[GSKeychain systemKeychain] setSecret:accessToken forKey:@"accessToken"];
+}
+
+- (void)linkedInViewControllerDidLogin:(LIUser*)user
+{
+	self.user = user;
 	[self dismissViewControllerAnimated:YES completion:^{
 		[self performSegueWithIdentifier:@"showLinkedInProfile" sender:self];
 	}];
@@ -79,37 +100,9 @@ NSString* const LIAccessTokenKey = @"LIAccessTokenKey";
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - LIProfileViewControllerDelegate
-
-- (void)linkedInProfileViewController:(LIProfileViewController*)viewController didFail:(NSString*)error
+- (void)error:(NSError*)error
 {
-	[self error:error];
-}
-
-- (void)linkedInProfileViewController:(LIProfileViewController*)viewController isBusy:(BOOL)busy
-{
-	[self busy:busy];
-}
-
-- (void)linkedInProfileViewControllerDidFinish:(LIProfileViewController*)viewController
-{
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Private
-
-- (void)busy:(BOOL)busy
-{
-	UIWindow* window = [[[UIApplication sharedApplication] windows] lastObject];
-	if (busy)
-		[MBProgressHUD showHUDAddedTo:window animated:YES];
-	else
-		[MBProgressHUD hideHUDForView:window animated:YES];
-}
-
-- (void)error:(NSString*)error
-{
-	[[[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+	[[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
 
 @end

@@ -9,19 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LIUser.h"
 
-@class LIProfileViewController;
-
-@protocol LIProfileViewControllerDelegate <NSObject>
-
-- (void)linkedInProfileViewController:(LIProfileViewController*)viewController isBusy:(BOOL)busy;
-- (void)linkedInProfileViewController:(LIProfileViewController*)viewController didFail:(NSString*)error;
-- (void)linkedInProfileViewControllerDidFinish:(LIProfileViewController*)viewController;
-
-@end
-
 @interface LIProfileViewController : UIViewController
 
-@property (strong, nonatomic) NSString* accessToken;
-@property (weak, nonatomic) id<LIProfileViewControllerDelegate> delegate;
+@property (strong, nonatomic) LIUser* user;
 
 @end

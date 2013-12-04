@@ -17,21 +17,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-BX-16u">
-                                <rect key="frame" x="110" y="269" width="101" height="30"/>
+                                <rect key="frame" x="110" y="269" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="LinkedIn Login">
+                                <state key="normal" title="LinkedIn Profile">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="linkedInLogin:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="ojc-MO-01e"/>
+                                    <action selector="login:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="Xae-UP-qhC"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="nF1-Uq-1hz" kind="modal" identifier="showLinkedInLogin" id="jAT-4p-aU0"/>
-                        <segue destination="gVv-uJ-eyX" kind="modal" identifier="showLinkedInProfile" id="DED-L0-XRK"/>
+                        <segue destination="nF1-Uq-1hz" kind="modal" identifier="showLinkedInLogin" id="DYt-Sd-d3n"/>
+                        <segue destination="1b0-PP-Fus" kind="modal" identifier="showLinkedInProfile" id="Qwu-Hx-1Cn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4L-l5-tyG" sceneMemberID="firstResponder"/>
@@ -51,63 +51,55 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="sVl-pQ-WtN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5el-J5-Wal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="484" y="-119"/>
+            <point key="canvasLocation" x="466" y="-152"/>
         </scene>
         <!--Profile View Controller-->
-        <scene sceneID="goD-eG-qgZ">
+        <scene sceneID="R43-O8-Zcn">
             <objects>
-                <viewController id="gVv-uJ-eyX" customClass="LIProfileViewController" sceneMemberID="viewController">
+                <viewController id="1b0-PP-Fus" customClass="LIProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="B80-ms-CSw"/>
-                        <viewControllerLayoutGuide type="bottom" id="fnq-VZ-WYK"/>
+                        <viewControllerLayoutGuide type="top" id="GId-2Q-dS5"/>
+                        <viewControllerLayoutGuide type="bottom" id="T6i-Tm-RDs"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rnr-38-G8D">
+                    <view key="view" contentMode="scaleToFill" id="U9t-sC-Opl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwY-JH-HBm">
-                                <rect key="frame" x="20" y="28" width="80" height="80"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3l-KQ-CMi">
+                                <rect key="frame" x="20" y="20" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WI4-dr-gC9">
-                                <rect key="frame" x="116" y="28" width="178" height="25"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FirstName LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6Q-SN-qDA">
+                                <rect key="frame" x="116" y="20" width="178" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="178" translatesAutoresizingMaskIntoConstraints="NO" id="Gqi-V5-gV7">
-                                <rect key="frame" x="116" y="55" width="178" height="53"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Headline" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="178" translatesAutoresizingMaskIntoConstraints="NO" id="z8v-pi-dEw">
+                                <rect key="frame" x="116" y="47" width="178" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWH-fO-QcH">
-                                <rect key="frame" x="137" y="269" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="done:" destination="gVv-uJ-eyX" eventType="touchUpInside" id="8G1-4b-jhK"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="headline" destination="Gqi-V5-gV7" id="ToO-wT-E5m"/>
-                        <outlet property="name" destination="WI4-dr-gC9" id="qpe-aX-ZgS"/>
-                        <outlet property="photo" destination="nwY-JH-HBm" id="12Q-uA-atm"/>
+                        <outlet property="headline" destination="z8v-pi-dEw" id="saG-co-JIA"/>
+                        <outlet property="name" destination="z6Q-SN-qDA" id="tdP-l4-rqF"/>
+                        <outlet property="photo" destination="g3l-KQ-CMi" id="2Gt-qD-prt"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="geL-Dw-BYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NxX-Ng-Mte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="484" y="538"/>
+            <point key="canvasLocation" x="466" y="529"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
