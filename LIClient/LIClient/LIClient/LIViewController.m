@@ -122,12 +122,11 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 		[self.delegate linkedInViewControllerIsBusy:YES];
 		[self fetchAccessToken:queryString[@"code"] success:^(NSString* accessToken, NSDate* expiration) {
 			[self.delegate linkedInViewControllerIsBusy:NO];
-			[self.delegate linkedInViewControllerDidAuthenticate:accessToken expiration:expiration];
 			if (!self.client)
 				self.client = [[LIClient alloc] initWithAccessToken:accessToken];
 			[self.client fetchCurrentUser:self.userFields success:^(LIUser* user) {
 				[self.delegate linkedInViewControllerIsBusy:NO];
-				[self.delegate linkedInViewControllerDidLogin:user];
+				[self.delegate linkedInViewControllerDidLogin:user accessToken:accessToken expiration:expiration];
 			} failure:^(NSError* error) {
 				[self.delegate linkedInViewControllerIsBusy:NO];
 				[self error:[error localizedDescription]];

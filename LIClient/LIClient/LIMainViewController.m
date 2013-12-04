@@ -80,15 +80,11 @@ LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFi
 	[self error:error];
 }
 
-- (void)linkedInViewControllerDidAuthenticate:(NSString*)accessToken expiration:(NSDate*)expiration
+- (void)linkedInViewControllerDidLogin:(LIUser*)user accessToken:(NSString *)accessToken expiration:(NSDate*)expiration
 {
-	//Save the accessToken to the secure iOS keychain so that you
-	//can query the LinkedIn API using only LIClient in the future
+	//Save the accessToken to the secure iOS keychain so that you can query the LinkedIn API using only LIClient in the future
 	[[GSKeychain systemKeychain] setSecret:accessToken forKey:@"accessToken"];
-}
-
-- (void)linkedInViewControllerDidLogin:(LIUser*)user
-{
+	
 	self.user = user;
 	[self dismissViewControllerAnimated:YES completion:^{
 		[self performSegueWithIdentifier:@"showLinkedInProfile" sender:self];
