@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView* photo;
 @property (weak, nonatomic) IBOutlet UILabel* name;
 @property (weak, nonatomic) IBOutlet UILabel* headline;
+@property (weak, nonatomic) IBOutlet UILabel *email;
 
 @end
 
@@ -23,6 +24,7 @@
 {
 	[super viewDidLoad];
 	self.name.text = self.user.name;
+	self.email.text = self.user.email;
 	self.headline.text = self.user.headline;
 	[self.photo setImageWithURL:[NSURL URLWithString:self.user.photoUrl]];
 }
