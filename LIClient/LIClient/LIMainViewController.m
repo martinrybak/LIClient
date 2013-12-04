@@ -13,8 +13,8 @@
 #import "NSString+CJStringValidator.h"
 #import "GSKeychain.h"
 
-LIPermission const LIMainViewControllerDefaultPermissions = LIPermissionBasicProfile|LIPermissionFullProfile|LIPermissionContactInfo|LIPermissionEmailAddress|LIPermissionMessages|LIPermissionNetwork;
-LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFieldFirstName|LIUserFieldLastName|LIUserFieldHeadline|LIUserFieldEmail|LIUserFieldPhotoUrl;
+LIPermission const LIMainViewControllerDefaultPermissions = LIPermissionBasicProfile|LIPermissionEmailAddress;
+LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFieldFirstName|LIUserFieldLastName|LIUserFieldEmail|LIUserFieldHeadline|LIUserFieldPhotoUrl;
 
 @interface LIMainViewController ()
 
