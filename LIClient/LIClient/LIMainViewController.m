@@ -41,7 +41,7 @@ LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFi
 		liViewController.permissions = LIMainViewControllerDefaultPermissions;
 		liViewController.userFields = LIMainViewControllerDefaultUserFields;
 	}
-    if ([[segue identifier] isEqualToString:@"showLinkedInProfile"] || [[segue identifier] isEqualToString:@"autoShowLinkedInProfile"])
+    if ([[segue identifier] isEqualToString:@"showLinkedInProfile"])
 	{
 		LIProfileViewController* liProfileViewController = [segue destinationViewController];
 		liProfileViewController.user = self.user;
