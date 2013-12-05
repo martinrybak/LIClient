@@ -35,7 +35,7 @@ LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFi
 		#warning Replace values with your own
 		liViewController.apiKey = @"ENTER YOUR LINKEDIN API KEY";
 		liViewController.secretKey = @"ENTER YOUR LINKEDIN SECRET KEY";
-		liViewController.state = @"ENTER A RANDOM STRING";
+		liViewController.state = @"ENTER A RANDOM STRING"; //Letters and digits only: i.e. aoiehqfkjhdsalifjncc39ujd
 		
 		liViewController.delegate = self;
 		liViewController.permissions = LIMainViewControllerDefaultPermissions;
