@@ -91,7 +91,7 @@ LIUserField const LIMainViewControllerDefaultUserFields = LIUserFieldId|LIUserFi
 	}];
 }
 
-- (void)linkedInViewControllerDidCancel:(LIViewController*)viewController
+- (void)linkedInViewControllerDidCancel
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
