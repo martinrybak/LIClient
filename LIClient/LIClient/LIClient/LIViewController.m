@@ -50,6 +50,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	self.webView.alpha = 0;
 	self.webView.delegate = self;
 	self.view.backgroundColor = [UIColor lightGrayColor];
+	self.edgesForExtendedLayout = UIRectEdgeNone;
 	[self.view addSubview:self.webView];
 	
 	if ([LIViewController isNilOrEmpty:self.apiKey])
