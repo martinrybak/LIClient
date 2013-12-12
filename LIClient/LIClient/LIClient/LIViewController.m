@@ -66,11 +66,6 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self authorizeUrl:self.permissions]]]];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-	return YES;
-}
-
 #pragma mark UIWebViewDelegate protocol
 
 - (void)webViewDidStartLoad:(UIWebView*)webView
