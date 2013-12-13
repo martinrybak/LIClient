@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString* lastName;
 @property (nonatomic, strong) NSString* headline;
 @property (nonatomic, strong) NSArray* phoneNumbers;
-@property (nonatomic, strong) NSString* photoUrl;
+@property (nonatomic, strong) NSURL* photoURL;
 @property (nonatomic, strong) LILocation* location;
 @property (nonatomic, strong) NSString* industry;
 @property (nonatomic, assign) NSInteger distance;
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSString* specialties;
 @property (nonatomic, strong) NSArray* positions;
 @property (nonatomic, strong) NSString* siteStandardProfileRequest;
-@property (nonatomic, strong) NSString* publicProfileUrl;
+@property (nonatomic, strong) NSString* publicProfileURL;
 
 - (NSString*)name;
 
