@@ -49,11 +49,11 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 	[self.view addSubview:self.webView];
 	
-	if ([LIViewController isNilOrEmpty:self.apiKey])
+	if ([NSString isNilOrEmpty:self.apiKey])
 		[NSException raise:@"apiKey must be set" format:nil];
-	if ([LIViewController isNilOrEmpty:self.secretKey])
+	if ([NSString isNilOrEmpty:self.secretKey])
 		[NSException raise:@"secretKey must be set" format:nil];
-	if ([LIViewController isNilOrEmpty:self.state])
+	if ([NSString isNilOrEmpty:self.state])
 		[NSException raise:@"state must be set" format:nil];
 	if (self.permissions == 0)
 		[NSException raise:@"permission must be set" format:nil];
