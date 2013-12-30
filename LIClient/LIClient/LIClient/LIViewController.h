@@ -43,6 +43,5 @@ typedef enum {
 @property (strong, nonatomic) LIClient* client;
 @property (strong, nonatomic) IBOutlet UIWebView* webView;
 - (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions userFields:(LIUserField)userFields;
-+ (BOOL)isNilOrEmpty:(NSString *)input;
 
 @end

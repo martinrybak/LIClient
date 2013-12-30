@@ -1,6 +1,6 @@
 pod 'RSCategories', '~> 0.1'
 pod 'KissXML', '~> 5.0'
-pod 'CJStringValidator', '~> 1.0.1'
+pod 'CJStringValidator', :head
 pod 'MBProgressHUD', '~> 0.8'
 pod 'GSKeychain', '~> 1.0.0'
 pod 'SDWebImage', '~> 3.5'

@@ -23,10 +23,6 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 
 @implementation LIViewController
 
-+ (BOOL)isNilOrEmpty:(NSString *)input {
-    return !(input && input.length);
-}
-
 #pragma mark - Public
 
 - (id)initWithAPIKey:(NSString*)apiKey secretKey:(NSString*)secretKey state:(NSString*)state permissions:(LIPermission)permissions userFields:(LIUserField)userFields
