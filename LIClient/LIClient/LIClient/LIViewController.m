@@ -56,7 +56,7 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	if ([NSString isNilOrEmpty:self.state])
 		[NSException raise:@"state must be set" format:nil];
 	if (self.permissions == 0)
-		[NSException raise:@"permission must be set" format:nil];
+		[NSException raise:@"permissions must be set" format:nil];
 
 	[self.delegate linkedInViewControllerIsBusy:YES];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self authorizeUrl:self.permissions]]]];
