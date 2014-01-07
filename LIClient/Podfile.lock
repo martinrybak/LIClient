@@ -1,15 +1,13 @@
 PODS:
-  - CJStringValidator (HEAD based on 1.0.1)
   - GSKeychain (1.0.0)
   - KissXML (5.0)
   - MBProgressHUD (0.8)
   - RSCategories (0.1)
-  - SDWebImage (3.5.1):
+  - SDWebImage (3.5.2):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5.1)
+  - SDWebImage/Core (3.5.2)
 
 DEPENDENCIES:
-  - CJStringValidator (HEAD)
   - GSKeychain (~> 1.0.0)
   - KissXML (~> 5.0)
   - MBProgressHUD (~> 0.8)
@@ -17,11 +15,10 @@ DEPENDENCIES:
   - SDWebImage (~> 3.5)
 
 SPEC CHECKSUMS:
-  CJStringValidator: f6b1226a0d995dd36af145595ba7c2c18437a9b9
   GSKeychain: 59439fa4bb05d21f2cbd4b67e7133c2572cc8dc4
   KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   RSCategories: 69826242601f1e95c07c5e562bd41f7dac7e39b8
-  SDWebImage: a408b548a634b792372e07e753fc1079aff5032a
+  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.29.0

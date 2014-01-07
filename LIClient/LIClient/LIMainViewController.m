@@ -10,7 +10,6 @@
 #import "LIProfileViewController.h"
 #import "LIViewController.h"
 #import "MBProgressHUD.h"
-#import "NSString+CJStringValidator.h"
 #import "GSKeychain.h"
 
 LIPermission const LIMainViewControllerDefaultPermissions = LIPermissionBasicProfile|LIPermissionEmailAddress;

@@ -7,7 +7,6 @@
 //
 
 #import "LIViewController.h"
-#import "NSString+CJStringValidator.h"
 #import "NSString+Helpers.h"
 
 NSString* const LIViewControllerAuthorizeUrl = @"https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=%@&scope=%@&state=%@&redirect_uri=%@";
@@ -49,11 +48,11 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 	[self.view addSubview:self.webView];
 	
-	if ([NSString isNilOrEmpty:self.apiKey])
+	if ([self stringIsNilOrEmpty:self.apiKey])
 		[NSException raise:@"apiKey must be set" format:nil];
-	if ([NSString isNilOrEmpty:self.secretKey])
+	if ([self stringIsNilOrEmpty:self.secretKey])
 		[NSException raise:@"secretKey must be set" format:nil];
-	if ([NSString isNilOrEmpty:self.state])
+	if ([self stringIsNilOrEmpty:self.state])
 		[NSException raise:@"state must be set" format:nil];
 	if (self.permissions == 0)
 		[NSException raise:@"permissions must be set" format:nil];
@@ -229,6 +228,11 @@ NSTimeInterval const LIViewControllerConnectionTimeout = 5.0;
 	NSError* error = [NSError errorWithDomain:NSStringFromClass([self class]) code:-1 userInfo:@{ NSLocalizedDescriptionKey:message }];
 	[self.delegate linkedInViewControllerIsBusy:NO];
 	[self.delegate linkedInViewControllerDidFail:error];
+}
+
+- (BOOL)stringIsNilOrEmpty:(NSString*)input
+{
+	return !input || !input.length;
 }
 
 @end
